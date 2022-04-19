@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>使用Certbot申请Let&#39;s Encrypt证书</title>
+      <link href="2020/05/17/certbot/"/>
+      <url>2020/05/17/certbot/</url>
+      
+        <content type="html"><![CDATA[<html><head></head><body><p>Let’s Encrypt 是 一个叫 ISRG （ Internet Security Research Group  ，互联网安全研究小组）的组织推出的免费安全证书计划。参与这个计划的组织和公司可以说是互联网顶顶重要的先驱，除了前文提到的三个牛气哄哄的发起单位外，后来又有思科（全球网络设备制造商执牛耳者）、 Akamai 加入，甚至连 Linux 基金会也加入了合作，这些大牌组织的加入保证了这个项目的可信度和可持续性</p><p>后来 ISRG 的发起者 EFF （电子前哨基金会）为 Let’s Encrypt 项目发布了一个官方的客户端 Certbot  ，利用它可以完全自动化的获取、部署和更新安全证书。这真是非常容易、方便呀，所以我们就可以直接使用官方客户端，不需要再使用第三方的工具了。虽然第三方工具也可以使用，但是官方工具更权威，风险也更小，而且遇到问题也更容易解决，毕竟有官方的支持。</p><h1 id="安装Certbot"><a href="#安装Certbot" class="headerlink" title="安装Certbot"></a>安装Certbot</h1><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository universe</span><br><span class="line">sudo add-apt-repository ppa:certbot/certbot</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install certbot</span><br></pre></td></tr></tbody></table></figure><h1 id="获取证书"><a href="#获取证书" class="headerlink" title="获取证书"></a>获取证书</h1><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot certonly --preferred-challenges dns --manual -d *.flyinsky.cn --email flyinfky@gmail.com --agree-tos --force-renewal --server https://acme-v02.api.letsencrypt.org/directory</span><br></pre></td></tr></tbody></table></figure><p>当如下提示时，需要暂停一下:</p><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.flysky.com with the following value:</span><br><span class="line"></span><br><span class="line">0QSLRQrFP3JjiO6bPjenAQcimu4qQru5aXvmxxgCDcE</span><br><span class="line"></span><br><span class="line">Before continuing, verify the record is deployed.</span><br></pre></td></tr></tbody></table></figure><p>此时需要向域名服务商添加一行<code>TXT</code>记录，记录为<code>_acme-challenge</code>，值为上诉<code>0QSLRQrFP3JjiO6bPjenAQcimu4qQru5aXvmxxgCDcE</code>。添加记录成功之后继续下一步。会看到如下信息:</p><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- Congratulations! Your certificate and chain have been saved at:</span><br></pre></td></tr></tbody></table></figure><p>后面一般会跟上申请到的证书路径，一般为<code>/etc/letsenctpt/live/example.com</code>,到这证书就申请完毕了。</p></body></html>]]></content>
+      
+      
+      <categories>
+          
+          <category> 服务器 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 证书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
